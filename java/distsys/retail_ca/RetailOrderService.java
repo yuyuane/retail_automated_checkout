@@ -42,7 +42,7 @@ public class RetailOrderService extends RetailOrderServiceImplBase {
     
     @Override
     public StreamObserver<Product> addOrderByProductIds(StreamObserver<Order> responseObserver){
-        
+        return null;
     }
     
     @Override

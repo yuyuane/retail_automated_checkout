@@ -42,7 +42,7 @@ public class RetailOpenDoorService extends RetailOpenDoorServiceImplBase {
     
     @Override
     public StreamObserver<Payment> currentDoorStatus(StreamObserver<Door> responseObserver){
-        
+        return null;
     }
     
     @Override
