@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "generated.grpc.retailpaybyorderservice";
+option java_outer_classname = "RetailPayByOrderServiceImpl";
+
+package RetailPayByOrderService;
+
+
+service RetailPayByOrderService {
+  // create payment record
+  rpc PayByOrderId(Order) returns (Payment) {}
+  // Get payment record
+  rpc GetPaymentInfoByOrderNo(Order) returns (Payment) {}
+
+}
+
+message Order {
+  string orderNo = 1;
+}
+
+message Payment {
+  string payNo = 1;
+  string pStatus = 2;
+}
+ 
+   
+

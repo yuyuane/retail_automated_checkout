@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "generated.grpc.retailorderservice";
+option java_outer_classname = "RetailOrderServiceImpl";
+
+package RetailOrderService;
+
+service RetailOrderService {
+    rpc AddOrderByProductIds(stream Product) returns (Order) {}
+    rpc GetProductsByOrderNo(Order) returns (stream Product) {}
+}
+
+message Product {
+  int64 productId = 1;
+  string productName = 2;
+}
+
+message Order {
+  string orderNo = 1;
+  double amount = 2;
+}
+ 
+   
+

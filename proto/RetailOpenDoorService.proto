@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "generated.grpc.retailopendoorservice";
+option java_outer_classname = "RetailOpenDoorServiceImpl";
+
+package RetailOpenDoorService;
+
+service RetailOpenDoorService {
+  // Get door status
+  rpc CurrentDoorStatus(stream Payment) returns (stream Door) {}
+  // Open the door 
+  rpc OpenDoor(Payment) returns (Door) {}
+
+}
+
+message Payment {
+  string payNo = 1;
+}
+
+message Door {
+  string dStatus = 1;
+  string messgae = 2;
+}
+ 
+   
+
