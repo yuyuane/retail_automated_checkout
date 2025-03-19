@@ -28,7 +28,7 @@ public class OrderMap {
         orderList = new HashMap<>();
     }
     public void addOrderByProducts(String[] names){
-        String order_no = getOrderNo();
+        String order_no = createOrderNo();
         ProductMap productAll = new ProductMap();
         List<Product> products = new ArrayList<>();
         double order_amount = 0;
@@ -48,9 +48,9 @@ public class OrderMap {
         orderList.put(order_no,order);
     }
     
-    private String getOrderNo(){
+    private String createOrderNo(){
         UUID uuid = UUID.randomUUID();
-        return uuid.toString();
+        return "orderNo_"+uuid.toString();
     }
     
     public Order getOrderByOrderNo(String orderNo){
@@ -72,15 +72,15 @@ public class OrderMap {
 }
 
 class Order{
-    private String order_no;
-    private String order_status;
-    private double order_amount;
+    private String orderNo;
+    private String orderStatus;
+    private double orderAmount;
     private List<Product> products;
     
     public Order(String no, String status, double amount, List<Product> products){
-        this.order_no = no;
-        this.order_status = status;
-        this.order_amount = amount;
+        this.orderNo = no;
+        this.orderStatus = status;
+        this.orderAmount = amount;
         this.products = products;
     }
     
@@ -90,6 +90,6 @@ class Order{
     
     @Override
     public String toString(){
-        return "Order{order_no='"+this.order_no+"', order_status='"+this.order_status+"', order_amount="+this.order_amount+", products="+this.products.toString()+"}\n";
+        return "Order{order_no='"+this.orderNo+"', order_status='"+this.orderStatus+"', order_amount="+this.orderAmount+", products="+this.products.toString()+"}\n";
     }
 }

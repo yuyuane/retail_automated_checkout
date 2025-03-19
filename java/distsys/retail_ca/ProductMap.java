@@ -76,22 +76,22 @@ public class ProductMap {
 
 
 class Product{
-    private int product_id;
-    private String product_name;
-    private double product_price;
+    private int productId;
+    private String productName;
+    private double productPrice;
 
     public Product(int pid, String name, double price){
-        this.product_id = pid;
-        this.product_name = name;
-        this.product_price = price;
+        this.productId = pid;
+        this.productName = name;
+        this.productPrice = price;
     }
     
     public double getPrice(){
-        return this.product_price;
+        return this.productPrice;
     }
     
     @Override
     public String toString(){
-         return "Product{ID="+this.product_id+", name='" + this.product_name + "', price=" + this.product_price + "}\n";
+         return "Product{ID="+this.productId+", name='" + this.productName + "', price=" + this.productPrice + "}\n";
     }
 }
