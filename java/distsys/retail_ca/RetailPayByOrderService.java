@@ -8,8 +8,11 @@ import io.grpc.ServerBuilder;
 import java.util.logging.Logger;
 import java.io.IOException;
 import io.grpc.Server;
+import io.grpc.stub.StreamObserver;
 
 import generated.grpc.retailpaybyorderservice.RetailPayByOrderServiceGrpc.RetailPayByOrderServiceImplBase;
+import generated.grpc.retailpaybyorderservice.Order;
+import generated.grpc.retailpaybyorderservice.Payment;
 
 /**
  *
@@ -35,5 +38,13 @@ public class RetailPayByOrderService extends RetailPayByOrderServiceImplBase {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+    
+    @Override
+    public void payByOrderId(Order request,StreamObserver<Payment> response){
+    }
+    
+    @Override
+    public void getPaymentInfoByOrderNo(Order request,StreamObserver<Payment> response){
     }
 }

@@ -8,8 +8,11 @@ import io.grpc.ServerBuilder;
 import java.util.logging.Logger;
 import java.io.IOException;
 import io.grpc.Server;
+import io.grpc.stub.StreamObserver;
 
 import generated.grpc.retailorderservice.RetailOrderServiceGrpc.RetailOrderServiceImplBase;
+import generated.grpc.retailorderservice.Product;
+import generated.grpc.retailorderservice.Order;
 /**
  *
  * @author yuyua
@@ -37,6 +40,13 @@ public class RetailOrderService extends RetailOrderServiceImplBase {
         
     }
     
-    public AddOrderByProductIds(){
+    @Override
+    public StreamObserver<Product> addOrderByProductIds(StreamObserver<Order> responseObserver){
+        
+    }
+    
+    @Override
+    public void getProductsByOrderNo(Order request, StreamObserver<Product> response){
+    
     }
 }

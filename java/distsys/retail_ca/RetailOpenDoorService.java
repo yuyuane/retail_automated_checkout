@@ -8,8 +8,12 @@ import io.grpc.ServerBuilder;
 import java.util.logging.Logger;
 import java.io.IOException;
 import io.grpc.Server;
+import io.grpc.stub.StreamObserver;
 
 import generated.grpc.retailopendoorservice.RetailOpenDoorServiceGrpc.RetailOpenDoorServiceImplBase;
+import generated.grpc.retailopendoorservice.Door;
+import generated.grpc.retailopendoorservice.Payment;
+
 /**
  *
  * @author yuyua
@@ -34,5 +38,14 @@ public class RetailOpenDoorService extends RetailOpenDoorServiceImplBase {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+    
+    @Override
+    public StreamObserver<Payment> currentDoorStatus(StreamObserver<Door> responseObserver){
+        
+    }
+    
+    @Override
+    public void openDoor(Payment request, StreamObserver<Door> response){
     }
 }
