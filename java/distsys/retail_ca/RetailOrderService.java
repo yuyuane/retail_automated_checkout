@@ -33,7 +33,7 @@ public class RetailOrderService extends RetailOrderServiceImplBase {
             server.awaitTermination();
         } catch (IOException e){
             e.printStackTrace();
-        }catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -41,12 +41,31 @@ public class RetailOrderService extends RetailOrderServiceImplBase {
     }
     
     @Override
-    public StreamObserver<Product> addOrderByProductIds(StreamObserver<Order> responseObserver){
-        return null;
+    public StreamObserver<Product> addOrderByProducts(StreamObserver<Order> responseObserver){
+        return new StreamObserver<Product>(){
+            
+            @Override
+            public void onNext(Product request){
+                //写逻辑
+            }
+            
+            @Override
+            public void onError(Throwable t){
+                //错误处理
+            }
+            
+            @Override
+            public void onCompleted() {
+                //写返回
+            }
+            
+            
+        };
     }
     
     @Override
     public void getProductsByOrderNo(Order request, StreamObserver<Product> response){
-    
+//        response.onNext(Product); 
+// 获取出每一个产品。onNext加入到response中
     }
 }

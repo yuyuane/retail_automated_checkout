@@ -26,14 +26,14 @@ public class RetailOrderClient {
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", port).usePlaintext().build();
         asyncStub = RetailOrderServiceGrpc.newStub(channel);
         syncStub = RetailOrderServiceGrpc.newBlockingStub(channel);
-        requestAddOrderByProductIds();
+        requestAddOrderByProducts();
         getProductsByOrderNo();
     }
     
     /**
      * Need to execute the AddOrderByProductIds
      */
-    private static void requestAddOrderByProductIds(){
+    private static void requestAddOrderByProducts(){
         
     }
     

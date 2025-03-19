@@ -42,10 +42,24 @@ public class RetailOpenDoorService extends RetailOpenDoorServiceImplBase {
     
     @Override
     public StreamObserver<Payment> currentDoorStatus(StreamObserver<Door> responseObserver){
-        return null;
+        return new StreamObserver<Payment>(){
+            @Override
+            public void onNext(Payment request){
+            
+            }
+            @Override
+            public void onError(Throwable t){
+            
+            }
+            @Override
+            public void onCompleted(){
+            
+            }
+        };
     }
     
     @Override
     public void openDoor(Payment request, StreamObserver<Door> response){
+        //讲多个数据加入到 response.onNext(door);
     }
 }

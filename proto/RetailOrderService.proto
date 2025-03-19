@@ -7,7 +7,7 @@ option java_outer_classname = "RetailOrderServiceImpl";
 package RetailOrderService;
 
 service RetailOrderService {
-    rpc AddOrderByProductIds(stream Product) returns (Order) {}
+    rpc AddOrderByProducts(stream Product) returns (Order) {}
     rpc GetProductsByOrderNo(Order) returns (stream Product) {}
 }
 

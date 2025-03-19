@@ -28,35 +28,35 @@ public final class RetailOrderServiceGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<generated.grpc.retailorderservice.Product,
-      generated.grpc.retailorderservice.Order> getAddOrderByProductIdsMethod;
+      generated.grpc.retailorderservice.Order> getAddOrderByProductsMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "AddOrderByProductIds",
+      fullMethodName = SERVICE_NAME + '/' + "AddOrderByProducts",
       requestType = generated.grpc.retailorderservice.Product.class,
       responseType = generated.grpc.retailorderservice.Order.class,
       methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
   public static io.grpc.MethodDescriptor<generated.grpc.retailorderservice.Product,
-      generated.grpc.retailorderservice.Order> getAddOrderByProductIdsMethod() {
-    io.grpc.MethodDescriptor<generated.grpc.retailorderservice.Product, generated.grpc.retailorderservice.Order> getAddOrderByProductIdsMethod;
-    if ((getAddOrderByProductIdsMethod = RetailOrderServiceGrpc.getAddOrderByProductIdsMethod) == null) {
+      generated.grpc.retailorderservice.Order> getAddOrderByProductsMethod() {
+    io.grpc.MethodDescriptor<generated.grpc.retailorderservice.Product, generated.grpc.retailorderservice.Order> getAddOrderByProductsMethod;
+    if ((getAddOrderByProductsMethod = RetailOrderServiceGrpc.getAddOrderByProductsMethod) == null) {
       synchronized (RetailOrderServiceGrpc.class) {
-        if ((getAddOrderByProductIdsMethod = RetailOrderServiceGrpc.getAddOrderByProductIdsMethod) == null) {
-          RetailOrderServiceGrpc.getAddOrderByProductIdsMethod = getAddOrderByProductIdsMethod = 
+        if ((getAddOrderByProductsMethod = RetailOrderServiceGrpc.getAddOrderByProductsMethod) == null) {
+          RetailOrderServiceGrpc.getAddOrderByProductsMethod = getAddOrderByProductsMethod = 
               io.grpc.MethodDescriptor.<generated.grpc.retailorderservice.Product, generated.grpc.retailorderservice.Order>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
               .setFullMethodName(generateFullMethodName(
-                  "RetailOrderService.RetailOrderService", "AddOrderByProductIds"))
+                  "RetailOrderService.RetailOrderService", "AddOrderByProducts"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   generated.grpc.retailorderservice.Product.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   generated.grpc.retailorderservice.Order.getDefaultInstance()))
-                  .setSchemaDescriptor(new RetailOrderServiceMethodDescriptorSupplier("AddOrderByProductIds"))
+                  .setSchemaDescriptor(new RetailOrderServiceMethodDescriptorSupplier("AddOrderByProducts"))
                   .build();
           }
         }
      }
-     return getAddOrderByProductIdsMethod;
+     return getAddOrderByProductsMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<generated.grpc.retailorderservice.Order,
@@ -120,9 +120,9 @@ public final class RetailOrderServiceGrpc {
 
     /**
      */
-    public io.grpc.stub.StreamObserver<generated.grpc.retailorderservice.Product> addOrderByProductIds(
+    public io.grpc.stub.StreamObserver<generated.grpc.retailorderservice.Product> addOrderByProducts(
         io.grpc.stub.StreamObserver<generated.grpc.retailorderservice.Order> responseObserver) {
-      return asyncUnimplementedStreamingCall(getAddOrderByProductIdsMethod(), responseObserver);
+      return asyncUnimplementedStreamingCall(getAddOrderByProductsMethod(), responseObserver);
     }
 
     /**
@@ -135,12 +135,12 @@ public final class RetailOrderServiceGrpc {
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getAddOrderByProductIdsMethod(),
+            getAddOrderByProductsMethod(),
             asyncClientStreamingCall(
               new MethodHandlers<
                 generated.grpc.retailorderservice.Product,
                 generated.grpc.retailorderservice.Order>(
-                  this, METHODID_ADD_ORDER_BY_PRODUCT_IDS)))
+                  this, METHODID_ADD_ORDER_BY_PRODUCTS)))
           .addMethod(
             getGetProductsByOrderNoMethod(),
             asyncServerStreamingCall(
@@ -172,10 +172,10 @@ public final class RetailOrderServiceGrpc {
 
     /**
      */
-    public io.grpc.stub.StreamObserver<generated.grpc.retailorderservice.Product> addOrderByProductIds(
+    public io.grpc.stub.StreamObserver<generated.grpc.retailorderservice.Product> addOrderByProducts(
         io.grpc.stub.StreamObserver<generated.grpc.retailorderservice.Order> responseObserver) {
       return asyncClientStreamingCall(
-          getChannel().newCall(getAddOrderByProductIdsMethod(), getCallOptions()), responseObserver);
+          getChannel().newCall(getAddOrderByProductsMethod(), getCallOptions()), responseObserver);
     }
 
     /**
@@ -234,7 +234,7 @@ public final class RetailOrderServiceGrpc {
   }
 
   private static final int METHODID_GET_PRODUCTS_BY_ORDER_NO = 0;
-  private static final int METHODID_ADD_ORDER_BY_PRODUCT_IDS = 1;
+  private static final int METHODID_ADD_ORDER_BY_PRODUCTS = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -267,8 +267,8 @@ public final class RetailOrderServiceGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_ADD_ORDER_BY_PRODUCT_IDS:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.addOrderByProductIds(
+        case METHODID_ADD_ORDER_BY_PRODUCTS:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.addOrderByProducts(
               (io.grpc.stub.StreamObserver<generated.grpc.retailorderservice.Order>) responseObserver);
         default:
           throw new AssertionError();
@@ -321,7 +321,7 @@ public final class RetailOrderServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new RetailOrderServiceFileDescriptorSupplier())
-              .addMethod(getAddOrderByProductIdsMethod())
+              .addMethod(getAddOrderByProductsMethod())
               .addMethod(getGetProductsByOrderNoMethod())
               .build();
         }

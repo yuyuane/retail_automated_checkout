@@ -42,9 +42,11 @@ public class RetailPayByOrderService extends RetailPayByOrderServiceImplBase {
     
     @Override
     public void payByOrderId(Order request,StreamObserver<Payment> response){
+        // response.onNext(Payment);
     }
     
     @Override
     public void getPaymentInfoByOrderNo(Order request,StreamObserver<Payment> response){
+        // response.onNext(Payment);
     }
 }

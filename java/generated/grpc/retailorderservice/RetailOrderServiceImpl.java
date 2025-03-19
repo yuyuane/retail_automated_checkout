@@ -36,14 +36,13 @@ public final class RetailOrderServiceImpl {
       "\n\030RetailOrderService.proto\022\022RetailOrderS" +
       "ervice\"1\n\007Product\022\021\n\tproductId\030\001 \001(\003\022\023\n\013" +
       "productName\030\002 \001(\t\"(\n\005Order\022\017\n\007orderNo\030\001 " +
-      "\001(\t\022\016\n\006amount\030\002 \001(\0012\274\001\n\022RetailOrderServi" +
-      "ce\022R\n\024AddOrderByProductIds\022\033.RetailOrder" +
-      "Service.Product\032\031.RetailOrderService.Ord" +
-      "er\"\000(\001\022R\n\024GetProductsByOrderNo\022\031.RetailO" +
-      "rderService.Order\032\033.RetailOrderService.P" +
-      "roduct\"\0000\001B=\n!generated.grpc.retailorder" +
-      "serviceB\026RetailOrderServiceImplP\001b\006proto" +
-      "3"
+      "\001(\t\022\016\n\006amount\030\002 \001(\0012\272\001\n\022RetailOrderServi" +
+      "ce\022P\n\022AddOrderByProducts\022\033.RetailOrderSe" +
+      "rvice.Product\032\031.RetailOrderService.Order" +
+      "\"\000(\001\022R\n\024GetProductsByOrderNo\022\031.RetailOrd" +
+      "erService.Order\032\033.RetailOrderService.Pro" +
+      "duct\"\0000\001B=\n!generated.grpc.retailorderse" +
+      "rviceB\026RetailOrderServiceImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
