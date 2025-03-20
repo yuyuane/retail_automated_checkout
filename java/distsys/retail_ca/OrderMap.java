@@ -43,7 +43,7 @@ public class OrderMap {
             products.add(product);
             orderAmount += product.getPrice();
         }
-        String orderStatus = "paid";
+        String orderStatus = "unpaid";
         orderAmount = (new BigDecimal(orderAmount).setScale(2, RoundingMode.DOWN)).doubleValue();
         Order order = new Order(orderNo,orderStatus,orderAmount,products);
         orderList.put(orderNo,order);
@@ -105,9 +105,18 @@ class Order{
     
     public Order(String no, String status, double amount, List<Product> products){
         this.orderNo = no;
+        //paid unpaid
         this.orderStatus = status;
         this.orderAmount = amount;
         this.products = products;
+    }
+    
+    public String getStatus(){
+        return this.orderStatus;
+    }
+    
+    public void setStatus(String status){
+        this.orderStatus=status;
     }
     
     public List<Product> getProduct(){

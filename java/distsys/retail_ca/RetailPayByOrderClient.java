@@ -11,6 +11,8 @@ import io.grpc.ManagedChannelBuilder;
 import generated.grpc.retailpaybyorderservice.RetailPayByOrderServiceGrpc;
 import generated.grpc.retailpaybyorderservice.RetailPayByOrderServiceGrpc.RetailPayByOrderServiceBlockingStub;
 import generated.grpc.retailpaybyorderservice.RetailPayByOrderServiceGrpc.RetailPayByOrderServiceStub;
+import generated.grpc.retailpaybyorderservice.Order;
+import generated.grpc.retailpaybyorderservice.Payment;
 
 /**
  *
@@ -31,10 +33,22 @@ public class RetailPayByOrderClient {
     }
     
     private static void requestPayByOrderId(){
+        System.out.println("The requestPayByOrderId of RetailPayByOrder starts!- Unary");
+        // orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e146931
+        String orderId = "orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e146931";
+        Order order = Order.newBuilder().setOrderNo(orderId).build();
+        Payment response = syncStub.payByOrderId(order);
+        System.out.println("Receied the newest paymentNo is "+response.getPayNo());
     
     }
+    
     private static void getPaymentInfoByOrderNo(){
-        
+        System.out.println("The getPaymentInfoByOrderNo of RetailPayByOrder starts!- Unary");
+        // orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e1469312
+        String orderId = "orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e1469312";
+        Order order = Order.newBuilder().setOrderNo(orderId).build();
+        Payment response = syncStub.getPaymentInfoByOrderNo(order);
+        System.out.println("Receied! paymentInfo{paymentNo="+response.getPayNo()+", paymentStatus="+response.getPStatus()+"}");
     }
     
 }

@@ -14,19 +14,41 @@ public class PaymentMap {
     String message;
     public PaymentMap(){
         paymentList = new HashMap<>();
+        this.initPayment();
         
     }
-    public Boolean addPaymentByOrderNo(String orderNo){
+    
+    public void initPayment(){
+        String paymentNo = "payNo_ac8-4b35-a9f7-6b6a6e1469312";
+        Payment payment = new Payment(paymentNo,"orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e1469312","paid");
+        paymentList.put(paymentNo,payment);
+    }
+    
+    public String pay(String orderNo){
         //修改订单状态，输出payment_no 输入支付状态[未支付],
         //check whether this order with orderNo exists in the paymentList;
+        OrderMap orderMap = new OrderMap();
+        Order order = orderMap.getOrderByOrderNo(orderNo);
+        System.out.println(1+""+order);
+        //Didn't find the order
+        if(order == null)return null;
+        //The order has been paid!
+        System.out.println("paid");
+        if(order.getStatus().equals("paid")) return null;
         Payment payment = getPaymentByOrderNo(orderNo);
-        if(payment==null){
-            return false;
+        String paymentNo;
+        System.out.println(2+""+payment);
+        if(payment == null){
+            paymentNo = createPayNo();
+            String status= "paid";
+            //Update order payment status
+            order.setStatus(status);
+            payment = new Payment(paymentNo, orderNo, status);
+            paymentList.put(paymentNo,payment);
+        }else{
+            paymentNo = payment.getPaymentNo();
         }
-        String paymentNo = createPayNo();
-        payment = new Payment(paymentNo, orderNo, "unpaid");
-        paymentList.put(paymentNo,payment);
-        return true;        
+        return paymentNo;        
     }
     
     
@@ -35,7 +57,6 @@ public class PaymentMap {
         return "payNo_"+uuid.toString();
     }
     
-    //输入支付状态，则为支付成功,先查询支付状态
     //order_status remember to udpate!!!!
     public void pay(String orderNo, String status){
     
@@ -47,8 +68,12 @@ public class PaymentMap {
         if(paymentList.size()==0){
             return null;
         }
-        Payment payment = paymentList.get(orderNo);
-        return payment;
+        for (Payment payment:paymentList.values()) {
+            if(payment.getOrderNo().equals(orderNo)){
+                return payment;
+            }
+        }
+        return null;
     }
     
     @Override
@@ -68,6 +93,18 @@ class Payment{
         this.paymentNo = no;
         this.orderNo = orderNo;
         this.paymentStatus = status;
+    }
+    
+    public String getOrderNo(){
+        return this.orderNo;
+    }
+    
+    public String getPaymentNo(){
+        return this.paymentNo;
+    }
+    
+    public String getPaymentStatus(){
+        return this.paymentStatus;
     }
     
     @Override

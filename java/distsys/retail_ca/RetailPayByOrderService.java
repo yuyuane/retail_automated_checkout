@@ -43,10 +43,28 @@ public class RetailPayByOrderService extends RetailPayByOrderServiceImplBase {
     @Override
     public void payByOrderId(Order request,StreamObserver<Payment> response){
         // response.onNext(Payment);
+       PaymentMap paymentMap = new PaymentMap();
+       String paymentNo = paymentMap.pay(request.getOrderNo());
+       if(paymentNo == null){
+            System.out.println("Please check whether this OrderNo is wrong!");
+            return;
+       }
+       Payment payment = Payment.newBuilder().setPayNo(paymentNo).build();
+       response.onNext(payment);
+       response.onCompleted();
     }
     
     @Override
     public void getPaymentInfoByOrderNo(Order request,StreamObserver<Payment> response){
         // response.onNext(Payment);
+        PaymentMap paymentMap = new PaymentMap();
+        distsys.retail_ca.Payment paymentInfo = paymentMap.getPaymentByOrderNo(request.getOrderNo());
+        if(paymentInfo == null){
+            System.out.println("Please check whether this OrderNo is wrong!");
+            return;
+        }
+        Payment payment = Payment.newBuilder().setPayNo(paymentInfo.getPaymentNo()).setPStatus(paymentInfo.getPaymentStatus()).build();
+        response.onNext(payment);
+        response.onCompleted();
     }
 }
