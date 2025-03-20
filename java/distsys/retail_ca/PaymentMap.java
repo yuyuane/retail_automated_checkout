@@ -43,7 +43,7 @@ public class PaymentMap {
     
     public Payment getPaymentByOrderNo(String orderNo){
         //根据order_no获取对应的支付信息
-        //Based on the orderNo, get the corresponding payment information
+        //Based on the orderNo, get the  payment information
         if(paymentList.size()==0){
             return null;
         }

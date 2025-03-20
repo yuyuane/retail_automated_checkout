@@ -9,10 +9,12 @@ import java.util.logging.Logger;
 import java.io.IOException;
 import io.grpc.Server;
 import io.grpc.stub.StreamObserver;
+import java.util.ArrayList;
 
 import generated.grpc.retailorderservice.RetailOrderServiceGrpc.RetailOrderServiceImplBase;
 import generated.grpc.retailorderservice.Product;
 import generated.grpc.retailorderservice.Order;
+import java.util.List;
 /**
  *
  * @author yuyua
@@ -43,10 +45,12 @@ public class RetailOrderService extends RetailOrderServiceImplBase {
     @Override
     public StreamObserver<Product> addOrderByProducts(StreamObserver<Order> responseObserver){
         return new StreamObserver<Product>(){
+            ArrayList<String> productNames = new ArrayList<>();
             
             @Override
             public void onNext(Product request){
-                //写逻辑
+                //accept the productName
+               productNames.add(request.getProductName());
             }
             
             @Override
@@ -56,7 +60,13 @@ public class RetailOrderService extends RetailOrderServiceImplBase {
             
             @Override
             public void onCompleted() {
-                //写返回
+                //call addorder function to create order
+                OrderMap orderMap = new OrderMap();
+                String orderNo = orderMap.addOrderByProducts(productNames);
+                //输入订单ID 到reply
+                Order reply = Order.newBuilder().setOrderNo(orderNo).build();
+                responseObserver.onNext(reply);
+                responseObserver.onCompleted();
             }
             
             
@@ -67,5 +77,19 @@ public class RetailOrderService extends RetailOrderServiceImplBase {
     public void getProductsByOrderNo(Order request, StreamObserver<Product> response){
 //        response.onNext(Product); 
 // 获取出每一个产品。onNext加入到response中
+        String orderNo = request.getOrderNo();
+        OrderMap orderMap = new OrderMap();
+        List<distsys.retail_ca.Product> products = orderMap.getProductsByOrderNo(orderNo);
+        if(products != null){
+            for (int i = 0; i < products.size(); i++) {
+                distsys.retail_ca.Product obj = products.get(i);
+                Product product = Product.newBuilder().setProductId(obj.getProductId()).setProductName(obj.getName()).build();
+                response.onNext(product);
+            }
+            response.onCompleted();
+        }else{
+            System.out.println("Please Check whether the OrderNo is Wrong! ");
+        }
+        
     }
 }

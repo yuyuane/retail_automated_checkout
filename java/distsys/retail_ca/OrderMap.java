@@ -19,33 +19,56 @@ public class OrderMap {
     String message;
     public static void main(String[] args) {
         OrderMap ordermap = new OrderMap();
-        String[] names = new String[]{"milk","chips"};
+//        String[] names = new String[]{"milk","chips"};
+        ArrayList<String> names = new ArrayList<>();
+        names.add("milk");
         ordermap.addOrderByProducts(names);
         System.out.println(ordermap.toString());
     }
     
     public OrderMap(){
         orderList = new HashMap<>();
+        this.initOrder();
     }
-    public void addOrderByProducts(String[] names){
-        String order_no = createOrderNo();
+    
+    public void initOrder(){
+        //set a order list
+        String orderNo = "orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e146931";
+        ProductMap productMap = new ProductMap();
+        List<Product> products = new ArrayList<>();
+        double orderAmount = 0;
+        for(Product product: productMap.productList.values()){
+            String name = product.getName(); 
+            //add product to products of order
+            products.add(product);
+            orderAmount += product.getPrice();
+        }
+        String orderStatus = "paid";
+        orderAmount = (new BigDecimal(orderAmount).setScale(2, RoundingMode.DOWN)).doubleValue();
+        Order order = new Order(orderNo,orderStatus,orderAmount,products);
+        orderList.put(orderNo,order);
+    }
+    
+    public String addOrderByProducts(ArrayList<String> names){
+        String orderNo = createOrderNo();
         ProductMap productAll = new ProductMap();
         List<Product> products = new ArrayList<>();
-        double order_amount = 0;
-        for (int i = 0; i < names.length; i++) {
-            String name = names[i];
+        double orderAmount = 0;
+        for (int i = 0; i < names.size(); i++) {
+            String name = names.get(i);
             //get the corresponding product based on the product_name
             Product product = productAll.getProduct(name);
             //add product to products of order
             products.add(product);
-            order_amount += product.getPrice();
+            orderAmount += product.getPrice();
         }
         
-        String order_status = "unpaid";
+        String orderStatus = "unpaid";
         // keep 2 decimal places
-        order_amount = (new BigDecimal(order_amount).setScale(2, RoundingMode.DOWN)).doubleValue();
-        Order order = new Order(order_no,order_status,order_amount,products);
-        orderList.put(order_no,order);
+        orderAmount = (new BigDecimal(orderAmount).setScale(2, RoundingMode.DOWN)).doubleValue();
+        Order order = new Order(orderNo,orderStatus,orderAmount,products);
+        orderList.put(orderNo,order);
+        return orderNo;
     }
     
     private String createOrderNo(){

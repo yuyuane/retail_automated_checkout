@@ -86,6 +86,14 @@ class Product{
         this.productPrice = price;
     }
     
+    public int getProductId(){
+        return this.productId;
+    }
+    
+    public String getName(){
+        return this.productName;
+    }
+    
     public double getPrice(){
         return this.productPrice;
     }

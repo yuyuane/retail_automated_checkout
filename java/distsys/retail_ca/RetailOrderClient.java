@@ -11,6 +11,8 @@ import io.grpc.stub.StreamObserver;
 import generated.grpc.retailorderservice.RetailOrderServiceGrpc;
 import generated.grpc.retailorderservice.RetailOrderServiceGrpc.RetailOrderServiceBlockingStub;
 import generated.grpc.retailorderservice.RetailOrderServiceGrpc.RetailOrderServiceStub;
+import generated.grpc.retailorderservice.Order;
+import generated.grpc.retailorderservice.Product;
 
 /**
  *
@@ -32,13 +34,75 @@ public class RetailOrderClient {
     
     /**
      * Need to execute the AddOrderByProductIds
+     * Get the parameter to service and handle logic
      */
     private static void requestAddOrderByProducts(){
+        System.out.println("The requestAddOrderByProducts of RetailOrderClient is starting!");
+        //get response
+        StreamObserver<Order> responseObserver = new StreamObserver<Order>(){
+            @Override
+            public void onNext(Order order){
+                //accept the orderNo
+                System.out.println("RetailOrderService has return the orderNo: "+order.getOrderNo());
+            }
+
+            @Override
+            public void onError(Throwable t){
+                t.printStackTrace();
+            }
+            
+            @Override            
+            public void onCompleted(){
+                System.out.println("This RetailOrderService is Completed!");
+            }
+        };
+        //get request
+        StreamObserver<Product> requestObserver = asyncStub.addOrderByProducts(responseObserver);
+        //set productname as parameter 
+        try{
+            requestObserver.onNext(Product.newBuilder().setProductName("chips").build());
+            Thread.sleep(500);
+            requestObserver.onNext(Product.newBuilder().setProductName("strawberry").build());
+            Thread.sleep(500);
+            requestObserver.onNext(Product.newBuilder().setProductName("milk").build());
+            Thread.sleep(500);
+            requestObserver.onNext(Product.newBuilder().setProductName("orange").build());
+            Thread.sleep(500);
+            requestObserver.onCompleted();
+            Thread.sleep(10000);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         
     }
     
     private static void  getProductsByOrderNo(){
-        
+        System.out.println("The getProductsByOrderNo of RetailOrderClient is starting!");
+        String orderNo = "wttetertr";
+        Order request = Order.newBuilder().setOrderNo(orderNo).build();
+        StreamObserver<Product> response = new StreamObserver<Product>(){
+           @Override
+           public void onNext(Product p){
+               //GET productId and productName
+               System.out.println("Product{id="+p.getProductId()+", name="+p.getProductName()+"}\n");
+           }
+           
+           @Override
+           public void onError(Throwable t){
+               t.printStackTrace();
+           }
+           
+           @Override
+           public void onCompleted(){
+               System.out.println("This RetailOrderService is Completed!");
+           }
+       };
+       asyncStub.getProductsByOrderNo(request, response);
+       try{
+            Thread.sleep(1000);
+       }catch(Exception e){
+            e.printStackTrace();
+       }
     }
     
     
