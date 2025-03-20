@@ -73,11 +73,9 @@ public class DoorMap {
     
     @Override
     public String toString(){
-        message = "---";
          for (Door door: doorMap.values()) {
             message += door.toString();
         }
-        message += "---";
         return message;
     }
 }

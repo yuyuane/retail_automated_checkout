@@ -48,7 +48,6 @@ public class RetailOpenDoorService extends RetailOpenDoorServiceImplBase {
             public void onNext(Payment request){
                 String paymentNo = request.getPayNo();
                 //get doorInfo based on payNo
-                System.out.println("doorMap.getDoorByPaymentNo--"+paymentNo);
                 distsys.retail_ca.Door doorInfo = doorMap.getDoorByPaymentNo(paymentNo);
                 Door reply = Door.newBuilder().setDoorNo(doorInfo.getDoorNo()).setDStatus(doorInfo.getStatus()).build();
                 responseObserver.onNext(reply);
