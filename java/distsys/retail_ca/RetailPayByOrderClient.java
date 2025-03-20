@@ -33,7 +33,7 @@ public class RetailPayByOrderClient {
     }
     
     private static void requestPayByOrderId(){
-        System.out.println("The requestPayByOrderId of RetailPayByOrder starts!- Unary");
+        System.out.println("Unary - requestPayByOrderId of RetailPayByOrder");
         // orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e146931
         String orderId = "orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e146931";
         Order order = Order.newBuilder().setOrderNo(orderId).build();
@@ -43,7 +43,7 @@ public class RetailPayByOrderClient {
     }
     
     private static void getPaymentInfoByOrderNo(){
-        System.out.println("The getPaymentInfoByOrderNo of RetailPayByOrder starts!- Unary");
+        System.out.println("Unary - getPaymentInfoByOrderNo of RetailPayByOrder");
         // orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e1469312
         String orderId = "orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e1469312";
         Order order = Order.newBuilder().setOrderNo(orderId).build();

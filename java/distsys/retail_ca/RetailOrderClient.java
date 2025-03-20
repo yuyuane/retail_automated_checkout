@@ -37,7 +37,7 @@ public class RetailOrderClient {
      * Get the parameter to service and handle logic
      */
     private static void requestAddOrderByProducts(){
-        System.out.println("The requestAddOrderByProducts of RetailOrderClient is starting!");
+        System.out.println("Client Streaming Asynchronous - requestAddOrderByProducts of RetailOrder ");
         //get response
         StreamObserver<Order> responseObserver = new StreamObserver<Order>(){
             @Override
@@ -77,7 +77,7 @@ public class RetailOrderClient {
     }
     
     private static void  getProductsByOrderNo(){
-        System.out.println("The getProductsByOrderNo of RetailOrderClient is starting!");
+        System.out.println("Server Streaming Asynchronous - getProductsByOrderNo of RetailOrder");
         String orderNo = "orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e146931";
         Order request = Order.newBuilder().setOrderNo(orderNo).build();
         StreamObserver<Product> response = new StreamObserver<Product>(){

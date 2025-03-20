@@ -43,23 +43,47 @@ public class RetailOpenDoorService extends RetailOpenDoorServiceImplBase {
     @Override
     public StreamObserver<Payment> currentDoorStatus(StreamObserver<Door> responseObserver){
         return new StreamObserver<Payment>(){
+            DoorMap doorMap = new DoorMap();
             @Override
             public void onNext(Payment request){
-            
+                String paymentNo = request.getPayNo();
+                //get doorInfo based on payNo
+                System.out.println("doorMap.getDoorByPaymentNo--"+paymentNo);
+                distsys.retail_ca.Door doorInfo = doorMap.getDoorByPaymentNo(paymentNo);
+                Door reply = Door.newBuilder().setDoorNo(doorInfo.getDoorNo()).setDStatus(doorInfo.getStatus()).build();
+                responseObserver.onNext(reply);
             }
             @Override
             public void onError(Throwable t){
-            
+                t.printStackTrace();
             }
             @Override
             public void onCompleted(){
-            
+                responseObserver.onCompleted();
             }
         };
     }
     
     @Override
     public void openDoor(Payment request, StreamObserver<Door> response){
-        //讲多个数据加入到 response.onNext(door);
+        //讲多个数据加入到 response.onNext(door); get doorNo paymentNo
+        //check whether the door is working
+        int doorNo = request.getDoorNo();
+        String payNo = request.getPayNo();
+        DoorMap doorMap = new DoorMap();
+        distsys.retail_ca.Door doorInfo = doorMap.getDoorByDoorNo(doorNo);
+        if(doorInfo.getStatus().equals("open")){
+            System.out.println("Please contact our staff!");
+            return;
+        }
+        distsys.retail_ca.Door doorInfo2 = doorMap.getDoorByPaymentNo(payNo);
+        if(doorInfo2 != null && doorInfo2.getStatus().equals("open")){
+            System.out.println("Please contact our staff!");
+            return;
+        }
+        doorMap.updateDoorStatusByDoorNo(doorNo,"open",payNo);
+        Door door = Door.newBuilder().setDStatus("open").setDoorNo(doorNo).build();
+        response.onNext(door);
+        response.onCompleted();
     }
 }

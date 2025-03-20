@@ -16,4 +16,9 @@ public interface PaymentOrBuilder extends
    */
   com.google.protobuf.ByteString
       getPayNoBytes();
+
+  /**
+   * <code>int32 doorNo = 2;</code>
+   */
+  int getDoorNo();
 }

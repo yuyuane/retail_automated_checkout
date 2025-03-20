@@ -16,6 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private Door() {
+    doorNo_ = 0;
     dStatus_ = "";
     messgae_ = "";
   }
@@ -44,13 +45,18 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 10: {
+          case 8: {
+
+            doorNo_ = input.readInt32();
+            break;
+          }
+          case 18: {
             java.lang.String s = input.readStringRequireUtf8();
 
             dStatus_ = s;
             break;
           }
-          case 18: {
+          case 26: {
             java.lang.String s = input.readStringRequireUtf8();
 
             messgae_ = s;
@@ -88,10 +94,19 @@ private static final long serialVersionUID = 0L;
             generated.grpc.retailopendoorservice.Door.class, generated.grpc.retailopendoorservice.Door.Builder.class);
   }
 
-  public static final int DSTATUS_FIELD_NUMBER = 1;
+  public static final int DOORNO_FIELD_NUMBER = 1;
+  private int doorNo_;
+  /**
+   * <code>int32 doorNo = 1;</code>
+   */
+  public int getDoorNo() {
+    return doorNo_;
+  }
+
+  public static final int DSTATUS_FIELD_NUMBER = 2;
   private volatile java.lang.Object dStatus_;
   /**
-   * <code>string dStatus = 1;</code>
+   * <code>string dStatus = 2;</code>
    */
   public java.lang.String getDStatus() {
     java.lang.Object ref = dStatus_;
@@ -106,7 +121,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string dStatus = 1;</code>
+   * <code>string dStatus = 2;</code>
    */
   public com.google.protobuf.ByteString
       getDStatusBytes() {
@@ -122,10 +137,10 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int MESSGAE_FIELD_NUMBER = 2;
+  public static final int MESSGAE_FIELD_NUMBER = 3;
   private volatile java.lang.Object messgae_;
   /**
-   * <code>string messgae = 2;</code>
+   * <code>string messgae = 3;</code>
    */
   public java.lang.String getMessgae() {
     java.lang.Object ref = messgae_;
@@ -140,7 +155,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string messgae = 2;</code>
+   * <code>string messgae = 3;</code>
    */
   public com.google.protobuf.ByteString
       getMessgaeBytes() {
@@ -170,11 +185,14 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (doorNo_ != 0) {
+      output.writeInt32(1, doorNo_);
+    }
     if (!getDStatusBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, dStatus_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, dStatus_);
     }
     if (!getMessgaeBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, messgae_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, messgae_);
     }
     unknownFields.writeTo(output);
   }
@@ -185,11 +203,15 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (doorNo_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(1, doorNo_);
+    }
     if (!getDStatusBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, dStatus_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, dStatus_);
     }
     if (!getMessgaeBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, messgae_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, messgae_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -207,6 +229,8 @@ private static final long serialVersionUID = 0L;
     generated.grpc.retailopendoorservice.Door other = (generated.grpc.retailopendoorservice.Door) obj;
 
     boolean result = true;
+    result = result && (getDoorNo()
+        == other.getDoorNo());
     result = result && getDStatus()
         .equals(other.getDStatus());
     result = result && getMessgae()
@@ -222,6 +246,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + DOORNO_FIELD_NUMBER;
+    hash = (53 * hash) + getDoorNo();
     hash = (37 * hash) + DSTATUS_FIELD_NUMBER;
     hash = (53 * hash) + getDStatus().hashCode();
     hash = (37 * hash) + MESSGAE_FIELD_NUMBER;
@@ -359,6 +385,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      doorNo_ = 0;
+
       dStatus_ = "";
 
       messgae_ = "";
@@ -389,6 +417,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public generated.grpc.retailopendoorservice.Door buildPartial() {
       generated.grpc.retailopendoorservice.Door result = new generated.grpc.retailopendoorservice.Door(this);
+      result.doorNo_ = doorNo_;
       result.dStatus_ = dStatus_;
       result.messgae_ = messgae_;
       onBuilt();
@@ -439,6 +468,9 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(generated.grpc.retailopendoorservice.Door other) {
       if (other == generated.grpc.retailopendoorservice.Door.getDefaultInstance()) return this;
+      if (other.getDoorNo() != 0) {
+        setDoorNo(other.getDoorNo());
+      }
       if (!other.getDStatus().isEmpty()) {
         dStatus_ = other.dStatus_;
         onChanged();
@@ -476,9 +508,35 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    private int doorNo_ ;
+    /**
+     * <code>int32 doorNo = 1;</code>
+     */
+    public int getDoorNo() {
+      return doorNo_;
+    }
+    /**
+     * <code>int32 doorNo = 1;</code>
+     */
+    public Builder setDoorNo(int value) {
+      
+      doorNo_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 doorNo = 1;</code>
+     */
+    public Builder clearDoorNo() {
+      
+      doorNo_ = 0;
+      onChanged();
+      return this;
+    }
+
     private java.lang.Object dStatus_ = "";
     /**
-     * <code>string dStatus = 1;</code>
+     * <code>string dStatus = 2;</code>
      */
     public java.lang.String getDStatus() {
       java.lang.Object ref = dStatus_;
@@ -493,7 +551,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string dStatus = 1;</code>
+     * <code>string dStatus = 2;</code>
      */
     public com.google.protobuf.ByteString
         getDStatusBytes() {
@@ -509,7 +567,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string dStatus = 1;</code>
+     * <code>string dStatus = 2;</code>
      */
     public Builder setDStatus(
         java.lang.String value) {
@@ -522,7 +580,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string dStatus = 1;</code>
+     * <code>string dStatus = 2;</code>
      */
     public Builder clearDStatus() {
       
@@ -531,7 +589,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string dStatus = 1;</code>
+     * <code>string dStatus = 2;</code>
      */
     public Builder setDStatusBytes(
         com.google.protobuf.ByteString value) {
@@ -547,7 +605,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object messgae_ = "";
     /**
-     * <code>string messgae = 2;</code>
+     * <code>string messgae = 3;</code>
      */
     public java.lang.String getMessgae() {
       java.lang.Object ref = messgae_;
@@ -562,7 +620,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string messgae = 2;</code>
+     * <code>string messgae = 3;</code>
      */
     public com.google.protobuf.ByteString
         getMessgaeBytes() {
@@ -578,7 +636,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string messgae = 2;</code>
+     * <code>string messgae = 3;</code>
      */
     public Builder setMessgae(
         java.lang.String value) {
@@ -591,7 +649,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string messgae = 2;</code>
+     * <code>string messgae = 3;</code>
      */
     public Builder clearMessgae() {
       
@@ -600,7 +658,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string messgae = 2;</code>
+     * <code>string messgae = 3;</code>
      */
     public Builder setMessgaeBytes(
         com.google.protobuf.ByteString value) {

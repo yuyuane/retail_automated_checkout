@@ -17,6 +17,7 @@ private static final long serialVersionUID = 0L;
   }
   private Payment() {
     payNo_ = "";
+    doorNo_ = 0;
   }
 
   @java.lang.Override
@@ -47,6 +48,11 @@ private static final long serialVersionUID = 0L;
             java.lang.String s = input.readStringRequireUtf8();
 
             payNo_ = s;
+            break;
+          }
+          case 16: {
+
+            doorNo_ = input.readInt32();
             break;
           }
           default: {
@@ -115,6 +121,15 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int DOORNO_FIELD_NUMBER = 2;
+  private int doorNo_;
+  /**
+   * <code>int32 doorNo = 2;</code>
+   */
+  public int getDoorNo() {
+    return doorNo_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -132,6 +147,9 @@ private static final long serialVersionUID = 0L;
     if (!getPayNoBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, payNo_);
     }
+    if (doorNo_ != 0) {
+      output.writeInt32(2, doorNo_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -143,6 +161,10 @@ private static final long serialVersionUID = 0L;
     size = 0;
     if (!getPayNoBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, payNo_);
+    }
+    if (doorNo_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, doorNo_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -162,6 +184,8 @@ private static final long serialVersionUID = 0L;
     boolean result = true;
     result = result && getPayNo()
         .equals(other.getPayNo());
+    result = result && (getDoorNo()
+        == other.getDoorNo());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -175,6 +199,8 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + PAYNO_FIELD_NUMBER;
     hash = (53 * hash) + getPayNo().hashCode();
+    hash = (37 * hash) + DOORNO_FIELD_NUMBER;
+    hash = (53 * hash) + getDoorNo();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -310,6 +336,8 @@ private static final long serialVersionUID = 0L;
       super.clear();
       payNo_ = "";
 
+      doorNo_ = 0;
+
       return this;
     }
 
@@ -337,6 +365,7 @@ private static final long serialVersionUID = 0L;
     public generated.grpc.retailopendoorservice.Payment buildPartial() {
       generated.grpc.retailopendoorservice.Payment result = new generated.grpc.retailopendoorservice.Payment(this);
       result.payNo_ = payNo_;
+      result.doorNo_ = doorNo_;
       onBuilt();
       return result;
     }
@@ -388,6 +417,9 @@ private static final long serialVersionUID = 0L;
       if (!other.getPayNo().isEmpty()) {
         payNo_ = other.payNo_;
         onChanged();
+      }
+      if (other.getDoorNo() != 0) {
+        setDoorNo(other.getDoorNo());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -483,6 +515,32 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       payNo_ = value;
+      onChanged();
+      return this;
+    }
+
+    private int doorNo_ ;
+    /**
+     * <code>int32 doorNo = 2;</code>
+     */
+    public int getDoorNo() {
+      return doorNo_;
+    }
+    /**
+     * <code>int32 doorNo = 2;</code>
+     */
+    public Builder setDoorNo(int value) {
+      
+      doorNo_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 doorNo = 2;</code>
+     */
+    public Builder clearDoorNo() {
+      
+      doorNo_ = 0;
       onChanged();
       return this;
     }

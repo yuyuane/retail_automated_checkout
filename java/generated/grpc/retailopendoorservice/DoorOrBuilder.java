@@ -8,21 +8,26 @@ public interface DoorOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string dStatus = 1;</code>
+   * <code>int32 doorNo = 1;</code>
+   */
+  int getDoorNo();
+
+  /**
+   * <code>string dStatus = 2;</code>
    */
   java.lang.String getDStatus();
   /**
-   * <code>string dStatus = 1;</code>
+   * <code>string dStatus = 2;</code>
    */
   com.google.protobuf.ByteString
       getDStatusBytes();
 
   /**
-   * <code>string messgae = 2;</code>
+   * <code>string messgae = 3;</code>
    */
   java.lang.String getMessgae();
   /**
-   * <code>string messgae = 2;</code>
+   * <code>string messgae = 3;</code>
    */
   com.google.protobuf.ByteString
       getMessgaeBytes();

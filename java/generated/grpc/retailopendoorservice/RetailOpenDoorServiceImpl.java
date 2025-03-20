@@ -34,15 +34,16 @@ public final class RetailOpenDoorServiceImpl {
   static {
     java.lang.String[] descriptorData = {
       "\n\033RetailOpenDoorService.proto\022\025RetailOpe" +
-      "nDoorService\"\030\n\007Payment\022\r\n\005payNo\030\001 \001(\t\"(" +
-      "\n\004Door\022\017\n\007dStatus\030\001 \001(\t\022\017\n\007messgae\030\002 \001(\t" +
-      "2\272\001\n\025RetailOpenDoorService\022V\n\021CurrentDoo" +
-      "rStatus\022\036.RetailOpenDoorService.Payment\032" +
-      "\033.RetailOpenDoorService.Door\"\000(\0010\001\022I\n\010Op" +
-      "enDoor\022\036.RetailOpenDoorService.Payment\032\033" +
-      ".RetailOpenDoorService.Door\"\000BC\n$generat" +
-      "ed.grpc.retailopendoorserviceB\031RetailOpe" +
-      "nDoorServiceImplP\001b\006proto3"
+      "nDoorService\"(\n\007Payment\022\r\n\005payNo\030\001 \001(\t\022\016" +
+      "\n\006doorNo\030\002 \001(\005\"8\n\004Door\022\016\n\006doorNo\030\001 \001(\005\022\017" +
+      "\n\007dStatus\030\002 \001(\t\022\017\n\007messgae\030\003 \001(\t2\272\001\n\025Ret" +
+      "ailOpenDoorService\022V\n\021CurrentDoorStatus\022" +
+      "\036.RetailOpenDoorService.Payment\032\033.Retail" +
+      "OpenDoorService.Door\"\000(\0010\001\022I\n\010OpenDoor\022\036" +
+      ".RetailOpenDoorService.Payment\032\033.RetailO" +
+      "penDoorService.Door\"\000BC\n$generated.grpc." +
+      "retailopendoorserviceB\031RetailOpenDoorSer" +
+      "viceImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -61,13 +62,13 @@ public final class RetailOpenDoorServiceImpl {
     internal_static_RetailOpenDoorService_Payment_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_RetailOpenDoorService_Payment_descriptor,
-        new java.lang.String[] { "PayNo", });
+        new java.lang.String[] { "PayNo", "DoorNo", });
     internal_static_RetailOpenDoorService_Door_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_RetailOpenDoorService_Door_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_RetailOpenDoorService_Door_descriptor,
-        new java.lang.String[] { "DStatus", "Messgae", });
+        new java.lang.String[] { "DoorNo", "DStatus", "Messgae", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -7,7 +7,7 @@ option java_outer_classname = "RetailOpenDoorServiceImpl";
 package RetailOpenDoorService;
 
 service RetailOpenDoorService {
-  // Get door status
+  // Get the doors' status
   rpc CurrentDoorStatus(stream Payment) returns (stream Door) {}
   // Open the door 
   rpc OpenDoor(Payment) returns (Door) {}
@@ -16,11 +16,13 @@ service RetailOpenDoorService {
 
 message Payment {
   string payNo = 1;
+  int32 doorNo = 2;
 }
 
 message Door {
-  string dStatus = 1;
-  string messgae = 2;
+  int32 doorNo = 1;
+  string dStatus = 2;
+  string messgae = 3;
 }
  
    

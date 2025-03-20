@@ -120,7 +120,7 @@ public final class RetailOpenDoorServiceGrpc {
 
     /**
      * <pre>
-     * Get door status
+     * Get the doors' status
      * </pre>
      */
     public io.grpc.stub.StreamObserver<generated.grpc.retailopendoorservice.Payment> currentDoorStatus(
@@ -178,7 +178,7 @@ public final class RetailOpenDoorServiceGrpc {
 
     /**
      * <pre>
-     * Get door status
+     * Get the doors' status
      * </pre>
      */
     public io.grpc.stub.StreamObserver<generated.grpc.retailopendoorservice.Payment> currentDoorStatus(
