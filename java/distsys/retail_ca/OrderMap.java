@@ -82,6 +82,9 @@ public class OrderMap {
     
     public List<Product> getProductsByOrderNo(String orderNo){
         Order order = orderList.get(orderNo);
+        if(order == null){
+            return null;
+        }
         return order.getProduct();
     }
     
