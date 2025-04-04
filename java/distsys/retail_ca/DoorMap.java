@@ -29,7 +29,7 @@ public class DoorMap {
 //        Boolean bool1 = doorMap.updateDoorStatusByDoorNo(3,"close",null);
 //        System.out.println(bool1);
 //        System.out.println("----------------");
-//        System.out.println(doorMap.toString());
+//        System.out.println(doorMap.toString()); 111
     }
     
     public DoorMap(){
