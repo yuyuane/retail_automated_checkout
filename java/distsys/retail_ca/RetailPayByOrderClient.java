@@ -23,32 +23,41 @@ public class RetailPayByOrderClient {
     private static RetailPayByOrderServiceStub asyncStub;
     private static RetailPayByOrderServiceBlockingStub syncStub;
     
-    public static void main(String[] args) {
+    public RetailPayByOrderClient(){
         int port = 50052;
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", port).usePlaintext().build();
         asyncStub = RetailPayByOrderServiceGrpc.newStub(channel);
         syncStub = RetailPayByOrderServiceGrpc.newBlockingStub(channel);
-        requestPayByOrderId();
-        getPaymentInfoByOrderNo();        
     }
     
-    private static void requestPayByOrderId(){
+    public static void main(String[] args) {
+//        int port = 50052;
+//        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", port).usePlaintext().build();
+//        asyncStub = RetailPayByOrderServiceGrpc.newStub(channel);
+//        syncStub = RetailPayByOrderServiceGrpc.newBlockingStub(channel);
+//        requestPayByOrderId();
+//        getPaymentInfoByOrderNo();        
+    }
+    
+    public String requestPayByOrderId(String orderId){
         System.out.println("Unary - requestPayByOrderId of RetailPayByOrder");
         // orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e146931
-        String orderId = "orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e146931";
+//        String orderId = "orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e146931";
         Order order = Order.newBuilder().setOrderNo(orderId).build();
         Payment response = syncStub.payByOrderId(order);
-        System.out.println("Receied the newest paymentNo is "+response.getPayNo());
+        return "Receied the newest paymentNo is "+response.getPayNo();
+//        System.out.println("Receied the newest paymentNo is "+response.getPayNo());
     
     }
     
-    private static void getPaymentInfoByOrderNo(){
+    public String getPaymentInfoByOrderNo(String orderId){
         System.out.println("Unary - getPaymentInfoByOrderNo of RetailPayByOrder");
         // orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e1469312
-        String orderId = "orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e1469312";
+//        String orderId = "orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e1469312";
         Order order = Order.newBuilder().setOrderNo(orderId).build();
         Payment response = syncStub.getPaymentInfoByOrderNo(order);
-        System.out.println("Receied! paymentInfo{paymentNo="+response.getPayNo()+", paymentStatus="+response.getPStatus()+"}");
+        return "paymentInfo{paymentNo="+response.getPayNo()+", paymentStatus="+response.getPStatus()+"}";
+//        System.out.println("Receied! paymentInfo{paymentNo="+response.getPayNo()+", paymentStatus="+response.getPStatus()+"}");
     }
     
 }

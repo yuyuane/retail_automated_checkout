@@ -22,16 +22,23 @@ public class RetailOpenDoorClient {
     private static RetailOpenDoorServiceStub asyncStub;
     private static RetailOpenDoorServiceBlockingStub syncStub;
     
-    public static void main(String[] args) {
+    public RetailOpenDoorClient(){
         int port = 50053;
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", port).usePlaintext().build();
         syncStub = RetailOpenDoorServiceGrpc.newBlockingStub(channel);
         asyncStub = RetailOpenDoorServiceGrpc.newStub(channel);
-        getAllCurrentDoorStatus();
-        requestOpenDoor();
     }
     
-    private static void getAllCurrentDoorStatus(){
+    public static void main(String[] args) {
+//        int port = 50053;
+//        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", port).usePlaintext().build();
+//        syncStub = RetailOpenDoorServiceGrpc.newBlockingStub(channel);
+//        asyncStub = RetailOpenDoorServiceGrpc.newStub(channel);
+//        getAllCurrentDoorStatus();
+//        requestOpenDoor();
+    }
+    
+    public void getAllCurrentDoorStatus(){
         System.out.println("Bi-directional - getCurrentDoorStatus of RetailOpenDoor");
         StreamObserver<Door> responseObserver = new StreamObserver<Door>(){
             @Override
@@ -62,7 +69,7 @@ public class RetailOpenDoorClient {
         }
     }
     
-    private static void requestOpenDoor(){
+    public void requestOpenDoor(){
         System.out.println("Unary - requestOpenDoor of RetailOpenDoor");
         //input doorNo
         int doorNo = 1;

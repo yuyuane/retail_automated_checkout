@@ -20,23 +20,30 @@ import generated.grpc.retailorderservice.Product;
  */
 public class RetailOrderClient {
     
-    private static RetailOrderServiceStub asyncStub;
-    private static RetailOrderServiceBlockingStub syncStub;
+    public RetailOrderServiceStub asyncStub;
+    public RetailOrderServiceBlockingStub syncStub;
     
-    public static void main(String[] args) {
+    public RetailOrderClient(){
         int port = 50051;
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", port).usePlaintext().build();
         asyncStub = RetailOrderServiceGrpc.newStub(channel);
         syncStub = RetailOrderServiceGrpc.newBlockingStub(channel);
-        requestAddOrderByProducts();
-        getProductsByOrderNo();
+    }
+    
+    public static void main(String[] args) {
+//        int port = 50051;
+//        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", port).usePlaintext().build();
+//        asyncStub = RetailOrderServiceGrpc.newStub(channel);
+//        syncStub = RetailOrderServiceGrpc.newBlockingStub(channel);
+//        requestAddOrderByProducts();
+//        getProductsByOrderNo();
     }
     
     /**
      * Need to execute the AddOrderByProductIds
      * Get the parameter to service and handle logic
      */
-    private static void requestAddOrderByProducts(){
+    public void requestAddOrderByProducts(){
         System.out.println("Client Streaming Asynchronous - requestAddOrderByProducts of RetailOrder ");
         //get response
         StreamObserver<Order> responseObserver = new StreamObserver<Order>(){
@@ -76,7 +83,7 @@ public class RetailOrderClient {
         
     }
     
-    private static void  getProductsByOrderNo(){
+    public void  getProductsByOrderNo(){
         System.out.println("Server Streaming Asynchronous - getProductsByOrderNo of RetailOrder");
         String orderNo = "orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e146931";
         Order request = Order.newBuilder().setOrderNo(orderNo).build();
