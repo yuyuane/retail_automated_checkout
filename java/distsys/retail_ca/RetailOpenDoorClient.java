@@ -31,7 +31,7 @@ public class RetailOpenDoorClient {
         requestOpenDoor();
     }
     
-    private static void getAllCurrentDoorStatus(){
+    public static void getAllCurrentDoorStatus(){
         System.out.println("Bi-directional - getCurrentDoorStatus of RetailOpenDoor");
         StreamObserver<Door> responseObserver = new StreamObserver<Door>(){
             @Override
@@ -62,7 +62,7 @@ public class RetailOpenDoorClient {
         }
     }
     
-    private static void requestOpenDoor(){
+    public static void requestOpenDoor(){
         System.out.println("Unary - requestOpenDoor of RetailOpenDoor");
         //input doorNo
         int doorNo = 1;
