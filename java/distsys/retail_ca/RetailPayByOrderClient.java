@@ -29,8 +29,8 @@ public class RetailPayByOrderClient {
         asyncStub = RetailPayByOrderServiceGrpc.newStub(channel);
         syncStub = RetailPayByOrderServiceGrpc.newBlockingStub(channel);
     }
-    
- 		System.out.println("Unary - requestPayByOrderId of RetailPayByOrder");
+    public String requestPayByOrderId(String orderId){
+        System.out.println("Unary - requestPayByOrderId of RetailPayByOrder");
         // orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e146931
 //        String orderId = "orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e146931";
         Order order = Order.newBuilder().setOrderNo(orderId).build();
@@ -40,8 +40,8 @@ public class RetailPayByOrderClient {
     
     }
     
-    public String void getPaymentInfoByOrderNo(){
-		System.out.println("Unary - getPaymentInfoByOrderNo of RetailPayByOrder");
+    public String getPaymentInfoByOrderNo(String orderId){
+	System.out.println("Unary - getPaymentInfoByOrderNo of RetailPayByOrder");
         // orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e1469312
 //        String orderId = "orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e1469312";
         Order order = Order.newBuilder().setOrderNo(orderId).build();
