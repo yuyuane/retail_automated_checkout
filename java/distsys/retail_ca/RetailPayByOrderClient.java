@@ -20,8 +20,8 @@ import generated.grpc.retailpaybyorderservice.Payment;
  */
 public class RetailPayByOrderClient {
     
-    private static RetailPayByOrderServiceStub asyncStub;
-    private static RetailPayByOrderServiceBlockingStub syncStub;
+    private RetailPayByOrderServiceStub asyncStub;
+    private RetailPayByOrderServiceBlockingStub syncStub;
     
     public RetailPayByOrderClient(){
         int port = 50052;

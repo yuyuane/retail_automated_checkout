@@ -7,7 +7,8 @@ import io.grpc.stub.StreamObserver;
 import javax.swing.JCheckBox;
 import generated.grpc.retailorderservice.Product;
 import generated.grpc.retailorderservice.Order;
-
+import generated.grpc.retailopendoorservice.Payment;
+import generated.grpc.retailopendoorservice.Door;
 
 /*
  *
@@ -25,6 +26,7 @@ public class RetailGUI extends javax.swing.JFrame {
     public RetailGUI() {
         initComponents();
         initProducts();
+        initRadio();
         retailOrderClient = new RetailOrderClient();
         retailPayByOrderClient = new RetailPayByOrderClient();
         retailOpenDoorClient = new RetailOpenDoorClient();
@@ -39,6 +41,12 @@ public class RetailGUI extends javax.swing.JFrame {
             productTextField6
         };
     }
+    
+    private void initRadio(){
+        doorNumberTextField.add(doorNum1);
+        doorNumberTextField.add(doorNum2);
+        doorNumberTextField.add(doorNum3);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,6 +56,7 @@ public class RetailGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        doorNumberTextField = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -81,9 +90,9 @@ public class RetailGUI extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         OrderServiceOrderIdTextField12 = new javax.swing.JTextField();
-        paymentNosTextField31 = new javax.swing.JLabel();
+        PaymentNosLabel = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        paymentNosTextField31 = new javax.swing.JTextArea();
         jLabel14 = new javax.swing.JLabel();
         paymentNoTextField32 = new javax.swing.JTextField();
         doorCheckButton = new javax.swing.JButton();
@@ -93,8 +102,10 @@ public class RetailGUI extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         doorServiceResult32 = new javax.swing.JTextArea();
         runOrderServiceButton = new javax.swing.JButton();
-        runOpenDoorServiceButton = new javax.swing.JButton();
-        runPayByOrderServiceButton = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        doorNum1 = new javax.swing.JRadioButton();
+        doorNum3 = new javax.swing.JRadioButton();
+        doorNum2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -165,6 +176,8 @@ public class RetailGUI extends javax.swing.JFrame {
 
         jLabel11.setText("OrderID:");
 
+        payServiceOrderIdTextField22.setText("orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e1469312");
+
         payServiceResult22.setColumns(20);
         payServiceResult22.setRows(5);
         jScrollPane4.setViewportView(payServiceResult22);
@@ -183,13 +196,16 @@ public class RetailGUI extends javax.swing.JFrame {
             }
         });
 
-        paymentNosTextField31.setText("PaymentNos:");
+        PaymentNosLabel.setText("PaymentNos:");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane5.setViewportView(jTextArea2);
+        paymentNosTextField31.setColumns(20);
+        paymentNosTextField31.setRows(5);
+        paymentNosTextField31.setText("payNo_ac8-4b35-a9f7-6b6a6e1469312,payNo_ac8-4b35-a9f7-6b6a6e1469311");
+        jScrollPane5.setViewportView(paymentNosTextField31);
 
         jLabel14.setText("PaymentNo:");
+
+        paymentNoTextField32.setText("payNo_ac8-4b35-a9f7-6b6a6e1469300");
 
         doorCheckButton.setText("Check");
         doorCheckButton.addActionListener(new java.awt.event.ActionListener() {
@@ -213,24 +229,25 @@ public class RetailGUI extends javax.swing.JFrame {
         doorServiceResult32.setRows(5);
         jScrollPane7.setViewportView(doorServiceResult32);
 
-        runOrderServiceButton.setText("Run OrderService");
+        runOrderServiceButton.setBackground(new java.awt.Color(153, 204, 255));
+        runOrderServiceButton.setForeground(new java.awt.Color(0, 0, 0));
+        runOrderServiceButton.setText("Run All Service");
         runOrderServiceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 runOrderServiceButtonActionPerformed(evt);
             }
         });
 
-        runOpenDoorServiceButton.setText("Run OpenDoorService");
-        runOpenDoorServiceButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                runOpenDoorServiceButtonActionPerformed(evt);
-            }
-        });
+        jLabel7.setText("Door Number:");
 
-        runPayByOrderServiceButton.setText("Run PayByOrderService ");
-        runPayByOrderServiceButton.addActionListener(new java.awt.event.ActionListener() {
+        doorNum1.setText("1");
+
+        doorNum3.setText("3");
+
+        doorNum2.setText("2");
+        doorNum2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                runPayByOrderServiceButtonActionPerformed(evt);
+                doorNum2ActionPerformed(evt);
             }
         });
 
@@ -239,28 +256,24 @@ public class RetailGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(paymentNosTextField31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(productsLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(orderCreateButton, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(payButton, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(productsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(orderCreateButton)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(payButton)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(payServiceOrderIdTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(runPayByOrderServiceButton)
-                                .addGap(18, 18, 18)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(126, 126, 126)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(170, 170, 170)
+                                .addGap(219, 219, 219)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel11)
@@ -270,76 +283,91 @@ public class RetailGUI extends javax.swing.JFrame {
                                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(98, 98, 98)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(28, 28, 28))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(PaymentNosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(doorCheckButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(134, 134, 134)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(paymentNoTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(runOpenDoorServiceButton)
-                                        .addGap(37, 37, 37)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(doorCheckButton)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(7, 7, 7))))
-                                .addGap(81, 81, 81)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel14)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(paymentNoTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(doorNum1)
+                                        .addGap(14, 14, 14)
+                                        .addComponent(doorNum2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(doorNum3))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(112, 112, 112)
+                                        .addComponent(jLabel6))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(doorOpenButton)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(112, 112, 112)
-                                        .addComponent(jLabel6)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(productTextField1)
-                        .addGap(0, 0, 0)
-                        .addComponent(productTextField2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(runOrderServiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(productTextField3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(64, 64, 64)
+                                .addComponent(productTextField1)
+                                .addGap(0, 0, 0)
+                                .addComponent(productTextField2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(productTextField3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(runOrderServiceButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(productTextField4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(productTextField5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(productTextField6)))
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(orderIdLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(OrderServiceOrderIdTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(orderCheckButton)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(jLabel2))))
+                        .addComponent(productTextField6)
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(orderIdLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(OrderServiceOrderIdTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(orderCheckButton)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(95, 95, 95)
+                                .addComponent(jLabel2)))))
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(runOrderServiceButton))
+                    .addComponent(runOrderServiceButton)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -363,11 +391,10 @@ public class RetailGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(runPayByOrderServiceButton)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(payServiceOrderIdTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -386,32 +413,32 @@ public class RetailGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(runOpenDoorServiceButton)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(doorCheckButton)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(doorOpenButton))))
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PaymentNosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(doorCheckButton)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(paymentNosTextField31)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel14)
-                                    .addComponent(paymentNoTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(paymentNoTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(doorNum2)
+                            .addComponent(doorNum1)
+                            .addComponent(doorNum3)
+                            .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(doorOpenButton)
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -444,7 +471,6 @@ public class RetailGUI extends javax.swing.JFrame {
                 try{
                     requestObserver.onNext(Product.newBuilder().setProductName(product.getText()).build());
                     Thread.sleep(500);
-                    requestObserver.onCompleted();
                  }catch(Exception e){
                     e.printStackTrace();
                  }
@@ -452,14 +478,6 @@ public class RetailGUI extends javax.swing.JFrame {
         }
         requestObserver.onCompleted();
     }//GEN-LAST:event_orderCreateButtonActionPerformed
-
-    /**
-     * Run PayByOrderService
-     * @param evt 
-     */
-    private void runPayByOrderServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runPayByOrderServiceButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_runPayByOrderServiceButtonActionPerformed
 
     /**
      * OrderService
@@ -475,7 +493,7 @@ public class RetailGUI extends javax.swing.JFrame {
            public void onNext(Product p){
                //GET productId and productName
 //               System.out.println("Product{id="+p.getProductId()+", name="+p.getProductName()+";}");
-               createOrderResult12.setText(createOrderResult12.getText()+"Product{id="+p.getProductId()+", name="+p.getProductName()+";}");
+               createOrderResult12.setText(createOrderResult12.getText()+"Product{id="+p.getProductId()+", name="+p.getProductName()+";}\r");
            }
            
            @Override
@@ -533,6 +551,38 @@ public class RetailGUI extends javax.swing.JFrame {
      */
     private void doorCheckButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doorCheckButtonActionPerformed
         // TODO add your handling code here:
+        System.out.println("Bi-directional - getCurrentDoorStatus of RetailOpenDoor");
+        StreamObserver<Door> responseObserver = new StreamObserver<Door>(){
+            @Override
+            public void onNext(Door d){
+//                doorServiceResult31.getText();
+                doorServiceResult31.setText(doorServiceResult31.getText()+"Door{doorNo="+d.getDoorNo()+", doorStatus= "+d.getDStatus()+"}\r");
+//                System.out.println("Door{doorNo="+d.getDoorNo()+", doorStatus= "+d.getDStatus()+"}");
+            }
+            @Override
+            public void onError(Throwable t){
+                t.printStackTrace();
+            }
+            
+            @Override
+            public void onCompleted(){
+                System.out.println("Bi-directional - getCurrentDoorStatus of RetailOpenDoor is completed!");
+            }
+        };
+        
+        StreamObserver<Payment> request = retailOpenDoorClient.asyncStub.currentDoorStatus(responseObserver);
+        try{
+            String paymentNos = paymentNosTextField31.getText();
+            String[] paymentNosStr = paymentNos.split(",");
+            for(String paymentNo: paymentNosStr){
+                request.onNext(Payment.newBuilder().setPayNo(paymentNo).build());
+                Thread.sleep(500);
+            }
+            request.onCompleted();
+            Thread.sleep(500);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_doorCheckButtonActionPerformed
     /**
      * OpenDoorService
@@ -541,6 +591,17 @@ public class RetailGUI extends javax.swing.JFrame {
      */
     private void doorOpenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doorOpenButtonActionPerformed
         // TODO add your handling code here:
+        String paymentNo = paymentNoTextField32.getText();
+        int doorNum;
+        if (doorNum1.isSelected()) {
+            doorNum = 1;
+        } else if (doorNum1.isSelected()) {
+            doorNum = 2;
+        }else{
+            doorNum = 3;
+        }
+        String message = retailOpenDoorClient.requestOpenDoor(doorNum, paymentNo);
+        doorServiceResult32.setText(message);
     }//GEN-LAST:event_doorOpenButtonActionPerformed
 
     /**
@@ -549,15 +610,14 @@ public class RetailGUI extends javax.swing.JFrame {
      */
     private void runOrderServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runOrderServiceButtonActionPerformed
         // TODO add your handling code here:
+        RetailOrderService.main(new String[]{});
+        RetailPayByOrderService.main(new String[]{});
+        RetailOpenDoorService.main(new String[]{});
     }//GEN-LAST:event_runOrderServiceButtonActionPerformed
 
-    /**
-     * run OpenDoorService
-     * @param evt 
-     */
-    private void runOpenDoorServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runOpenDoorServiceButtonActionPerformed
+    private void doorNum2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doorNum2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_runOpenDoorServiceButtonActionPerformed
+    }//GEN-LAST:event_doorNum2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -596,9 +656,14 @@ public class RetailGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField OrderServiceOrderIdTextField12;
+    private javax.swing.JLabel PaymentNosLabel;
     private javax.swing.JTextArea createOrderResult11;
     private javax.swing.JTextArea createOrderResult12;
     private javax.swing.JButton doorCheckButton;
+    private javax.swing.JRadioButton doorNum1;
+    private javax.swing.JRadioButton doorNum2;
+    private javax.swing.JRadioButton doorNum3;
+    private javax.swing.ButtonGroup doorNumberTextField;
     private javax.swing.JButton doorOpenButton;
     private javax.swing.JTextArea doorServiceResult31;
     private javax.swing.JTextArea doorServiceResult32;
@@ -610,6 +675,7 @@ public class RetailGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -620,7 +686,6 @@ public class RetailGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JButton orderCheckButton;
     private javax.swing.JButton orderCreateButton;
     private javax.swing.JLabel orderIdLabel;
@@ -631,7 +696,7 @@ public class RetailGUI extends javax.swing.JFrame {
     private javax.swing.JTextArea payServiceResult21;
     private javax.swing.JTextArea payServiceResult22;
     private javax.swing.JTextField paymentNoTextField32;
-    private javax.swing.JLabel paymentNosTextField31;
+    private javax.swing.JTextArea paymentNosTextField31;
     private javax.swing.JCheckBox productTextField1;
     private javax.swing.JCheckBox productTextField2;
     private javax.swing.JCheckBox productTextField3;
@@ -639,8 +704,6 @@ public class RetailGUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox productTextField5;
     private javax.swing.JCheckBox productTextField6;
     private javax.swing.JLabel productsLabel;
-    private javax.swing.JButton runOpenDoorServiceButton;
     private javax.swing.JButton runOrderServiceButton;
-    private javax.swing.JButton runPayByOrderServiceButton;
     // End of variables declaration//GEN-END:variables
 }

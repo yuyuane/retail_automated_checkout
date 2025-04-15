@@ -32,13 +32,16 @@ public class RetailOrderService extends RetailOrderServiceImplBase {
             Server server = ServerBuilder.forPort(port).addService(orderService).build().start();
             logger.info("The first step Server started, listening on the port "+port);
             System.out.println("The first step Server started, listening on the port "+port);
-            server.awaitTermination();
+            new Thread(()->{
+                try {
+                    server.awaitTermination(); // 阻塞在新线程中
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
         } catch (IOException e){
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        } 
         
     }
     

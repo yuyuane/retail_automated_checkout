@@ -19,8 +19,8 @@ import generated.grpc.retailopendoorservice.Payment;
  * @author yuyua
  */
 public class RetailOpenDoorClient {
-    private static RetailOpenDoorServiceStub asyncStub;
-    private static RetailOpenDoorServiceBlockingStub syncStub;
+    public RetailOpenDoorServiceStub asyncStub;
+    public RetailOpenDoorServiceBlockingStub syncStub;
     
     public RetailOpenDoorClient(){
         int port = 50053;
@@ -60,13 +60,14 @@ public class RetailOpenDoorClient {
         }
     }
     
-    public void requestOpenDoor(){
+    public String requestOpenDoor(int doorNo,String paymentNo){
 	System.out.println("Unary - requestOpenDoor of RetailOpenDoor");
         //input doorNo
-        int doorNo = 1;
-        String paymentNo = "payNo_ac8-4b35-a9f7-6b6a6e1469300";
+//        int doorNo = 1;
+//        String paymentNo = "payNo_ac8-4b35-a9f7-6b6a6e1469300";
         Payment payment = Payment.newBuilder().setDoorNo(doorNo).setPayNo(paymentNo).build();
         Door response = syncStub.openDoor(payment);
-        System.out.println("Receied! The door of number "+doorNo+" is "+response.getDStatus()+", Welcome again!");
+        return "The door of number "+doorNo+" is "+response.getDStatus()+", Welcome again!";
+//        System.out.println("Receied! The door of number "+doorNo+" is "+response.getDStatus()+", Welcome again!");
     }
 }
