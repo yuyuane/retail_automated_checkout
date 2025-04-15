@@ -29,17 +29,7 @@ public class RetailOpenDoorClient {
         asyncStub = RetailOpenDoorServiceGrpc.newStub(channel);
     }
     
-    public static void main(String[] args) {
-//        int port = 50053;
-//        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", port).usePlaintext().build();
-//        syncStub = RetailOpenDoorServiceGrpc.newBlockingStub(channel);
-//        asyncStub = RetailOpenDoorServiceGrpc.newStub(channel);
-//        getAllCurrentDoorStatus();
-//        requestOpenDoor();
-    }
-    
-    public void getAllCurrentDoorStatus(){
-        System.out.println("Bi-directional - getCurrentDoorStatus of RetailOpenDoor");
+		 System.out.println("Bi-directional - getCurrentDoorStatus of RetailOpenDoor");
         StreamObserver<Door> responseObserver = new StreamObserver<Door>(){
             @Override
             public void onNext(Door d){
@@ -70,7 +60,7 @@ public class RetailOpenDoorClient {
     }
     
     public void requestOpenDoor(){
-        System.out.println("Unary - requestOpenDoor of RetailOpenDoor");
+	   System.out.println("Unary - requestOpenDoor of RetailOpenDoor");
         //input doorNo
         int doorNo = 1;
         String paymentNo = "payNo_ac8-4b35-a9f7-6b6a6e1469300";
