@@ -27,6 +27,7 @@ import generated.grpc.retailopendoorservice.Payment;
 public class RetailOpenDoorClient {
     public RetailOpenDoorServiceStub asyncStub;
     public RetailOpenDoorServiceBlockingStub syncStub;
+    private static final String API_KEY = "HJYew6Tm1ry6we6K5PLnFfj4qjsVXZ0Y";
     
     public RetailOpenDoorClient(){
         try{
@@ -53,8 +54,9 @@ public class RetailOpenDoorClient {
                     int port = info.getPort();
                     System.out.println("Discovered RetailOpenDoorServiceGrpc at "+host+":"+port);
                     ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
-                    syncStub = RetailOpenDoorServiceGrpc.newBlockingStub(channel);
-                    asyncStub = RetailOpenDoorServiceGrpc.newStub(channel);
+                    ApiKeyCredential credentials = new ApiKeyCredential(API_KEY);
+                    syncStub = RetailOpenDoorServiceGrpc.newBlockingStub(channel).withCallCredentials(credentials);
+                    asyncStub = RetailOpenDoorServiceGrpc.newStub(channel).withCallCredentials(credentials);
                 }
             });
         }catch(IOException e){

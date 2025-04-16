@@ -31,7 +31,7 @@ public class RetailOpenDoorService extends RetailOpenDoorServiceImplBase {
         int port = 50053;
         RetailOpenDoorService orderService = new RetailOpenDoorService();
         try {
-            Server server = ServerBuilder.forPort(port).addService(orderService).build().start();
+            Server server = ServerBuilder.forPort(port).addService(orderService).intercept(new ApiKeyInterceptor()).build().start();
             logger.info("The third step Server started, listening on the port "+port);
             System.out.println("The third step Server started, listening on the port "+port);
             // register Service

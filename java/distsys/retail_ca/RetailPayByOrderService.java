@@ -31,7 +31,7 @@ public class RetailPayByOrderService extends RetailPayByOrderServiceImplBase {
         int port = 50052;
         RetailPayByOrderService orderService = new RetailPayByOrderService();
         try {
-            Server server = ServerBuilder.forPort(port).addService(orderService).build().start();
+            Server server = ServerBuilder.forPort(port).addService(orderService).intercept(new ApiKeyInterceptor()).build().start();
             logger.info("The second step Server started, listening on the port "+port);
             System.out.println("The second step Server started, listening on the port "+port);
             // register Service
