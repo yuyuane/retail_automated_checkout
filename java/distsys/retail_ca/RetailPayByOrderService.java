@@ -9,6 +9,9 @@ import java.util.logging.Logger;
 import java.io.IOException;
 import io.grpc.Server;
 import io.grpc.stub.StreamObserver;
+import java.net.InetAddress;
+import javax.jmdns.JmDNS;
+import javax.jmdns.ServiceInfo;
 
 import generated.grpc.retailpaybyorderservice.RetailPayByOrderServiceGrpc.RetailPayByOrderServiceImplBase;
 import generated.grpc.retailpaybyorderservice.Order;
@@ -31,8 +34,11 @@ public class RetailPayByOrderService extends RetailPayByOrderServiceImplBase {
             Server server = ServerBuilder.forPort(port).addService(orderService).build().start();
             logger.info("The second step Server started, listening on the port "+port);
             System.out.println("The second step Server started, listening on the port "+port);
-            
-             new Thread(() -> {
+            // register Service
+            JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+            ServiceInfo serviceInfo = ServiceInfo.create("_grpc._tcp.local.", "RetailPayByOrderService", 50052, "desc=Pay's gRPC service");
+            jmdns.registerService(serviceInfo);
+            new Thread(() -> {
                 try {
                     server.awaitTermination(); // 阻塞在新线程中
                 } catch (InterruptedException e) {

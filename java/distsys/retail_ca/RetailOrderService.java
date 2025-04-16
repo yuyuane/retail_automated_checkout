@@ -10,6 +10,9 @@ import java.io.IOException;
 import io.grpc.Server;
 import io.grpc.stub.StreamObserver;
 import java.util.ArrayList;
+import java.net.InetAddress;
+import javax.jmdns.JmDNS;
+import javax.jmdns.ServiceInfo;
 
 import generated.grpc.retailorderservice.RetailOrderServiceGrpc.RetailOrderServiceImplBase;
 import generated.grpc.retailorderservice.Product;
@@ -32,6 +35,10 @@ public class RetailOrderService extends RetailOrderServiceImplBase {
             Server server = ServerBuilder.forPort(port).addService(orderService).build().start();
             logger.info("The first step Server started, listening on the port "+port);
             System.out.println("The first step Server started, listening on the port "+port);
+            // register Service
+            JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+            ServiceInfo serviceInfo = ServiceInfo.create("_grpc._tcp.local.", "RetailOrderServiceGrpc", 50051, "desc=Order's gRPC service");
+            jmdns.registerService(serviceInfo);
             new Thread(()->{
                 try {
                     server.awaitTermination(); // 阻塞在新线程中

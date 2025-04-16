@@ -9,6 +9,9 @@ import java.util.logging.Logger;
 import java.io.IOException;
 import io.grpc.Server;
 import io.grpc.stub.StreamObserver;
+import java.net.InetAddress;
+import javax.jmdns.JmDNS;
+import javax.jmdns.ServiceInfo;
 
 import generated.grpc.retailopendoorservice.RetailOpenDoorServiceGrpc.RetailOpenDoorServiceImplBase;
 import generated.grpc.retailopendoorservice.Door;
@@ -31,6 +34,10 @@ public class RetailOpenDoorService extends RetailOpenDoorServiceImplBase {
             Server server = ServerBuilder.forPort(port).addService(orderService).build().start();
             logger.info("The third step Server started, listening on the port "+port);
             System.out.println("The third step Server started, listening on the port "+port);
+            // register Service
+            JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+            ServiceInfo serviceInfo = ServiceInfo.create("_grpc._tcp.local.", "RetailOpenDoorServiceGrpc", 50053, "desc=Door's gRPC service");
+            jmdns.registerService(serviceInfo);
             new Thread(()->{
                 try {
                     server.awaitTermination(); // 阻塞在新线程中

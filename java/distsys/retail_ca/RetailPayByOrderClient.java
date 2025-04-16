@@ -8,6 +8,13 @@ package distsys.retail_ca;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
+import java.net.InetAddress;
+import javax.jmdns.JmDNS;
+import javax.jmdns.ServiceInfo;
+import javax.jmdns.ServiceListener;
+import javax.jmdns.ServiceEvent;
+import java.io.IOException;
+
 import generated.grpc.retailpaybyorderservice.RetailPayByOrderServiceGrpc;
 import generated.grpc.retailpaybyorderservice.RetailPayByOrderServiceGrpc.RetailPayByOrderServiceBlockingStub;
 import generated.grpc.retailpaybyorderservice.RetailPayByOrderServiceGrpc.RetailPayByOrderServiceStub;
@@ -24,10 +31,41 @@ public class RetailPayByOrderClient {
     private RetailPayByOrderServiceBlockingStub syncStub;
     
     public RetailPayByOrderClient(){
-        int port = 50052;
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", port).usePlaintext().build();
-        asyncStub = RetailPayByOrderServiceGrpc.newStub(channel);
-        syncStub = RetailPayByOrderServiceGrpc.newBlockingStub(channel);
+        try{
+            JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+            jmdns.addServiceListener("_grpc._tcp.local.", new ServiceListener(){
+                @Override
+                public void serviceAdded(ServiceEvent event) {
+                    System.out.println("Service added: " + event.getName());
+                }
+
+                @Override
+                public void serviceRemoved(ServiceEvent event) {
+                    System.out.println("Service removed: " + event.getName());
+                }
+                
+                @Override
+                public void serviceResolved(ServiceEvent event){
+                    if(!event.getName().equals("RetailPayByOrderServiceGrpc")){
+                        // other Service
+                        return;
+                    }
+                    ServiceInfo info = event.getInfo();
+                    String host = info.getHostAddresses()[0];
+                    int port = info.getPort();
+                    System.out.println("Discovered RetailPayByOrderServiceGrpc at " + host + ":" + port);
+                    ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
+                    asyncStub = RetailPayByOrderServiceGrpc.newStub(channel);
+                    syncStub = RetailPayByOrderServiceGrpc.newBlockingStub(channel);
+                }
+            });
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+//        int port = 50052;
+//        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", port).usePlaintext().build();
+//        asyncStub = RetailPayByOrderServiceGrpc.newStub(channel);
+//        syncStub = RetailPayByOrderServiceGrpc.newBlockingStub(channel);
     }
     public String requestPayByOrderId(String orderId){
         System.out.println("Unary - requestPayByOrderId of RetailPayByOrder");
