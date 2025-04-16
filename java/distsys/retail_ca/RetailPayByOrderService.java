@@ -36,7 +36,7 @@ public class RetailPayByOrderService extends RetailPayByOrderServiceImplBase {
             System.out.println("The second step Server started, listening on the port "+port);
             // register Service
             JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
-            ServiceInfo serviceInfo = ServiceInfo.create("_grpc._tcp.local.", "RetailPayByOrderService", 50052, "desc=Pay's gRPC service");
+            ServiceInfo serviceInfo = ServiceInfo.create("_grpc._tcp.local.", "RetailPayByOrderServiceGrpc", 50052, "desc=Pay's gRPC service");
             jmdns.registerService(serviceInfo);
             new Thread(() -> {
                 try {

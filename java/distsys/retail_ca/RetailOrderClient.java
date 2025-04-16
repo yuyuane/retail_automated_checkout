@@ -35,12 +35,12 @@ public class RetailOrderClient {
             jmdns.addServiceListener("_grpc._tcp.local.", new ServiceListener(){
                 @Override
                 public void serviceAdded(ServiceEvent event) {
-                    System.out.println("Service added: " + event.getName());
+                    System.out.println("Service added: "+event.getName());
                 }
 
                 @Override
                 public void serviceRemoved(ServiceEvent event) {
-                    System.out.println("Service removed: " + event.getName());
+                    System.out.println("Service removed: "+event.getName());
                 }
                 
                 @Override
@@ -52,7 +52,7 @@ public class RetailOrderClient {
                     ServiceInfo info = event.getInfo();
                     String host = info.getHostAddresses()[0];
                     int port = info.getPort();
-                    System.out.println("Discovered RetailOrderServiceGrpc at " + host + ":" + port);
+                    System.out.println("Discovered RetailOrderServiceGrpc at "+host+":"+port);
                     ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
                     asyncStub = RetailOrderServiceGrpc.newStub(channel);
                     syncStub = RetailOrderServiceGrpc.newBlockingStub(channel);
