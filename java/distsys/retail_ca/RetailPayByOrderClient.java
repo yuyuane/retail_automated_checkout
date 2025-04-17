@@ -57,12 +57,12 @@ public class RetailPayByOrderClient {
                     System.out.println("Discovered RetailPayByOrderServiceGrpc at "+host+ ":"+port);
                     ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
                     ApiKeyCredential credentials = new ApiKeyCredential(API_KEY);
-                    try{
+                   // try{
                         asyncStub = RetailPayByOrderServiceGrpc.newStub(channel).withCallCredentials(credentials);
                         syncStub = RetailPayByOrderServiceGrpc.newBlockingStub(channel).withCallCredentials(credentials);
-                    }finally{
-                        channel.shutdown();
-                    }
+                    //}finally{
+                     //   channel.shutdown();
+                    //}
                 }
             });
         }catch(IOException e){
@@ -84,7 +84,7 @@ public class RetailPayByOrderClient {
     
     }
     
-    public String getPaymentInfoByOrderNo(String orderId){
+    public String requestgetPaymentInfoByOrderNo(String orderId){
 	System.out.println("Unary - getPaymentInfoByOrderNo of RetailPayByOrder");
         // orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e1469312
 //        String orderId = "orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e1469312";

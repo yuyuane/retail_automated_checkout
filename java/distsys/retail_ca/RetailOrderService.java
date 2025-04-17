@@ -32,7 +32,7 @@ public class RetailOrderService extends RetailOrderServiceImplBase {
         RetailOrderService orderService = new RetailOrderService();
         int port = 50051;
         try {
-            Server server = ServerBuilder.forPort(port).addService(orderService).build().start();
+            Server server = ServerBuilder.forPort(port).addService(orderService).intercept(new ApiKeyInterceptor()).build().start();
             logger.info("The first step Server started, listening on the port "+port);
             System.out.println("The first step Server started, listening on the port "+port);
             // register Service

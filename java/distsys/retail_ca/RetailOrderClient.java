@@ -56,13 +56,12 @@ public class RetailOrderClient {
                     System.out.println("Discovered RetailOrderServiceGrpc at "+host+":"+port);
                     ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
                     ApiKeyCredential credentials = new ApiKeyCredential(API_KEY);
-                    try{
+                    //try{
                         asyncStub = RetailOrderServiceGrpc.newStub(channel).withCallCredentials(credentials);
                         syncStub = RetailOrderServiceGrpc.newBlockingStub(channel).withCallCredentials(credentials);
-                    }finally{
-                        channel.shutdown();
-                    }
-                    
+                    //}finally{
+                       // channel.shutdown();
+                    //}
                 }
             });
         }catch(IOException e){
@@ -84,7 +83,7 @@ public class RetailOrderClient {
      * Get the parameter to service and handle logic
      */
     public void requestAddOrderByProducts(){
-	 	System.out.println("Client Streaming Asynchronous - requestAddOrderByProducts of RetailOrder ");
+	System.out.println("Client Streaming Asynchronous - requestAddOrderByProducts of RetailOrder ");
         //get response
         StreamObserver<Order> responseObserver = new StreamObserver<Order>(){
             @Override
@@ -109,9 +108,9 @@ public class RetailOrderClient {
         try{
             requestObserver.onNext(Product.newBuilder().setProductName("chips").build());
             Thread.sleep(500);
-            requestObserver.onNext(Product.newBuilder().setProductName("strawberry").build());
+            requestObserver.onNext(Product.newBuilder().setProductName("candy").build());
             Thread.sleep(500);
-            requestObserver.onNext(Product.newBuilder().setProductName("milk").build());
+            requestObserver.onNext(Product.newBuilder().setProductName("nuts").build());
             Thread.sleep(500);
             requestObserver.onNext(Product.newBuilder().setProductName("orange").build());
             Thread.sleep(500);
@@ -124,7 +123,7 @@ public class RetailOrderClient {
     }
     
     public void  getProductsByOrderNo(){
-	 	System.out.println("Server Streaming Asynchronous - getProductsByOrderNo of RetailOrder");
+	System.out.println("Server Streaming Asynchronous - getProductsByOrderNo of RetailOrder");
         String orderNo = "orderNo_8455c095-1ac8-4b35-a9f7-6b6a6e146931";
         Order request = Order.newBuilder().setOrderNo(orderNo).build();
         StreamObserver<Product> response = new StreamObserver<Product>(){

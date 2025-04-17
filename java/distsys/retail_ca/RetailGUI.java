@@ -119,7 +119,7 @@ public class RetailGUI extends javax.swing.JFrame {
 
         jLabel5.setText(" CheckDoorStatus");
 
-        jLabel6.setText("DoorService OpenDoor");
+        jLabel6.setText("OpenDoor");
 
         productsLabel.setText("products:");
 
@@ -292,8 +292,8 @@ public class RetailGUI extends javax.swing.JFrame {
                                 .addComponent(jLabel7)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel14)
-                                    .addGap(71, 71, 71)
-                                    .addComponent(paymentNoTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(paymentNoTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -307,15 +307,15 @@ public class RetailGUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(134, 134, 134)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(170, 170, 170)
                                 .addComponent(doorNum1)
                                 .addGap(18, 18, 18)
                                 .addComponent(doorNum2)
                                 .addGap(18, 18, 18)
                                 .addComponent(doorNum3))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(152, 152, 152)
                                 .addComponent(jLabel6))))))
             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -484,7 +484,7 @@ public class RetailGUI extends javax.swing.JFrame {
            public void onNext(Product p){
                //GET productId and productName
 //               System.out.println("Product{id="+p.getProductId()+", name="+p.getProductName()+";}");
-               createOrderResult12.setText(createOrderResult12.getText()+"Product{id="+p.getProductId()+", name="+p.getProductName()+";}\r");
+               createOrderResult12.setText(createOrderResult12.getText()+"Product{id="+p.getProductId()+", name="+p.getProductName()+"}\r");
            }
            
            @Override
@@ -531,7 +531,7 @@ public class RetailGUI extends javax.swing.JFrame {
     private void payCheckButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payCheckButtonActionPerformed
         // TODO add your handling code here:
         String orderId = payServiceOrderIdTextField22.getText();
-        String message = retailPayByOrderClient.getPaymentInfoByOrderNo(orderId);
+        String message = retailPayByOrderClient.requestgetPaymentInfoByOrderNo(orderId);
         payServiceResult22.setText(message);
     }//GEN-LAST:event_payCheckButtonActionPerformed
 
@@ -587,7 +587,7 @@ public class RetailGUI extends javax.swing.JFrame {
         int doorNum;
         if (doorNum1.isSelected()) {
             doorNum = 1;
-        } else if (doorNum1.isSelected()) {
+        } else if (doorNum2.isSelected()) {
             doorNum = 2;
         }else{
             doorNum = 3;

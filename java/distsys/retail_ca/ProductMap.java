@@ -29,34 +29,18 @@ public class ProductMap {
      */
     public void allProduct(){
        productList = new HashMap<>();
-       Product cup = new Product(1,"cup",5.1);
-       productList.put("cup", cup);
-       Product pen = new Product(2,"pen",1.0);
-       productList.put("pen", pen);
-       Product chips = new Product(3,"chips",2.2);
+       Product chips = new Product(1,"chips",2.2);
        productList.put("chips", chips);
-       Product crackers = new Product(4,"crackers",1.5);
-       productList.put("crackers", crackers);
-       Product nuts = new Product(5,"nuts",4.0);
+       Product nuts = new Product(2,"nuts",4.0);
        productList.put("nuts", nuts);
-       Product candy = new Product(6,"candy",1.1);
+       Product candy = new Product(3,"candy",1.1);
        productList.put("candy", candy);
-       Product cookies = new Product(7,"cookies",1.39);
+       Product cookies = new Product(4,"cookies",1.39);
        productList.put("cookies", cookies);
-       Product apple = new Product(8,"apple",1.0);
+       Product apple = new Product(5,"apple",1.0);
        productList.put("apple", apple);
-       Product banana = new Product(9,"banana",1.0);
-       productList.put("banana", banana);
-       Product orange = new Product(10,"orange",2.29);
+       Product orange = new Product(6,"orange",2.29);
        productList.put("orange", orange);
-       Product soda = new Product(11,"soda",2.0);
-       productList.put("soda", soda);
-       Product milk = new Product(12,"milk",1.1967);
-       productList.put("milk", milk);
-       Product beer = new Product(13,"beer",2.69);
-       productList.put("beer", beer);
-       Product strawberry = new Product(14,"strawberry",2.89);
-       productList.put("strawberry", strawberry);
     }
     
     public Product getProduct(String name){

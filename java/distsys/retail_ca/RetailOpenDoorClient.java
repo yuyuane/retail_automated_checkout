@@ -55,12 +55,12 @@ public class RetailOpenDoorClient {
                     System.out.println("Discovered RetailOpenDoorServiceGrpc at "+host+":"+port);
                     ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
                     ApiKeyCredential credentials = new ApiKeyCredential(API_KEY);
-                    try{
+                    //try{
                         syncStub = RetailOpenDoorServiceGrpc.newBlockingStub(channel).withCallCredentials(credentials);
                         asyncStub = RetailOpenDoorServiceGrpc.newStub(channel).withCallCredentials(credentials);
-                    }finally{
-                        channel.shutdown();
-                    }
+                    //}finally{
+                     //   channel.shutdown();
+                    //}
                     
                 }
             });
@@ -74,7 +74,7 @@ public class RetailOpenDoorClient {
 //        asyncStub = RetailOpenDoorServiceGrpc.newStub(channel);
     }
     
-    public void getCurrentDoorStatus(){
+    public void requestGetCurrentDoorStatus(){
 	System.out.println("Bi-directional - getCurrentDoorStatus of RetailOpenDoor");
         StreamObserver<Door> responseObserver = new StreamObserver<Door>(){
             @Override
