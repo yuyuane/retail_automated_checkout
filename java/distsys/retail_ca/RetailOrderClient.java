@@ -56,8 +56,13 @@ public class RetailOrderClient {
                     System.out.println("Discovered RetailOrderServiceGrpc at "+host+":"+port);
                     ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
                     ApiKeyCredential credentials = new ApiKeyCredential(API_KEY);
-                    asyncStub = RetailOrderServiceGrpc.newStub(channel).withCallCredentials(credentials);
-                    syncStub = RetailOrderServiceGrpc.newBlockingStub(channel).withCallCredentials(credentials);
+                    try{
+                        asyncStub = RetailOrderServiceGrpc.newStub(channel).withCallCredentials(credentials);
+                        syncStub = RetailOrderServiceGrpc.newBlockingStub(channel).withCallCredentials(credentials);
+                    }finally{
+                        channel.shutdown();
+                    }
+                    
                 }
             });
         }catch(IOException e){
