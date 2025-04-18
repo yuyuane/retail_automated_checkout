@@ -56,13 +56,13 @@ public class RetailPayByOrderClient {
                     int port = info.getPort();
                     System.out.println("Discovered RetailPayByOrderServiceGrpc at "+host+ ":"+port);
                     ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
+                    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                        System.out.println("Shut down RetailPayByOrderService channel!");
+                        channel.shutdown();
+                    }));
                     ApiKeyCredential credentials = new ApiKeyCredential(API_KEY);
-                   // try{
-                        asyncStub = RetailPayByOrderServiceGrpc.newStub(channel).withCallCredentials(credentials);
-                        syncStub = RetailPayByOrderServiceGrpc.newBlockingStub(channel).withCallCredentials(credentials);
-                    //}finally{
-                     //   channel.shutdown();
-                    //}
+                    asyncStub = RetailPayByOrderServiceGrpc.newStub(channel).withCallCredentials(credentials);
+                    syncStub = RetailPayByOrderServiceGrpc.newBlockingStub(channel).withCallCredentials(credentials);
                 }
             });
         }catch(IOException e){
